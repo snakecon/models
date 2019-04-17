@@ -49,14 +49,14 @@ DATASET_NAME = 'ImageNet'
 ###############################################################################
 def get_filenames(is_training, data_dir):
   """Return filenames for dataset."""
-  if is_training:
-    return [
-        os.path.join(data_dir, 'train-%05d-of-01024' % i)
-        for i in range(_NUM_TRAIN_FILES)]
-  else:
-    return [
-        os.path.join(data_dir, 'validation-%05d-of-00128' % i)
-        for i in range(128)]
+      # if is_training:
+      #   return [
+      #       os.path.join(data_dir, 'train-%05d-of-01024' % i)
+      #       for i in range(_NUM_TRAIN_FILES)]
+      # else:
+  return [
+      os.path.join(data_dir, 'validation-%05d-of-00128' % i)
+      for i in range(128)]
 
 
 def _parse_example_proto(example_serialized):
@@ -327,7 +327,12 @@ def define_imagenet_flags():
   resnet_run_loop.define_resnet_flags(
       resnet_size_choices=['18', '34', '50', '101', '152', '200'])
   flags.adopt_module_key_flags(resnet_run_loop)
-  flags_core.set_defaults(train_epochs=90)
+  flags_core.set_defaults(
+      train_epochs=90,
+      resnet_version='2',
+      model_dir='./image_model/',
+      # pretrained_model_checkpoint_path='./resnet_imagenet_v2_fp32_20181001/',
+  )
 
 
 def run_imagenet(flags_obj):
