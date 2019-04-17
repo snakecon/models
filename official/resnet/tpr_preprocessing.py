@@ -89,8 +89,9 @@ def _decode_crop_and_flip(image_buffer, bbox, num_channels):
   crop_window = tf.stack([offset_y, offset_x, target_height, target_width])
 
   # Use the fused decode and crop op here, which is faster than each in series.
-  cropped = tf.image.decode_and_crop_jpeg(
-      image_buffer, crop_window, channels=num_channels)
+  cropped = tf.image.decode_jpeg(image_buffer)
+  # cropped = tf.image.decode_and_crop_jpeg(
+  #     image_buffer, crop_window, channels=num_channels)
 
   # Flip to add a little more random distortion in.
   cropped = tf.image.random_flip_left_right(cropped)
