@@ -316,10 +316,12 @@ def define_imagenet_flags():
         resnet_size_choices=['18', '34', '50', '101', '152', '200'])
     flags.adopt_module_key_flags(resnet_run_loop)
     flags_core.set_defaults(
-        train_epochs=90,
+        train_epochs=1,
+        clean=True,
         resnet_version='2',
         model_dir='./tpr_model/',
         data_dir='./tpr_dataset/',
+        export_dir='./tpr_export/'
         # pretrained_model_checkpoint_path='./resnet_imagenet_v2_fp32_20181001/',
     )
 

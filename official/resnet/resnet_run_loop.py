@@ -585,7 +585,7 @@ def resnet_main(
           image_bytes_serving_input_fn, shape, dtype=export_dtype)
     else:
       input_receiver_fn = export.build_tensor_serving_input_receiver_fn(
-          shape, batch_size=flags_obj.batch_size, dtype=export_dtype)
+          shape, batch_size=1, dtype=export_dtype)
     classifier.export_savedmodel(flags_obj.export_dir, input_receiver_fn,
                                  strip_default_attrs=True)
 
