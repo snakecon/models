@@ -10,13 +10,13 @@ import tensorflow as tf
 from absl import app as absl_app
 from absl import flags
 
-from official.resnet import tpr_preprocessing
+from official.resnet import fer_preprocessing
 from official.resnet import resnet_model
 from official.resnet import resnet_run_loop
 from official.utils.flags import core as flags_core
 from official.utils.logs import logger
 
-_DEFAULT_IMAGE_SIZE = 224
+_DEFAULT_IMAGE_SIZE = 48
 _NUM_CHANNELS = 3
 _NUM_CLASSES = 9
 
@@ -29,10 +29,10 @@ _NUM_TRAIN_FILES = 60
 _NUM_VALIDATION_FILES = 30
 _SHUFFLE_BUFFER = 10000
 
-DATASET_NAME = 'TPR'
-
+DATASET_NAME = 'FER'
 
 tf.app.flags.DEFINE_string('f', '', 'kernel')
+
 
 ###############################################################################
 # Data processing
@@ -136,7 +136,7 @@ def parse_record(raw_record, is_training, dtype):
     """
     image_buffer, label, bbox = _parse_example_proto(raw_record)
 
-    image = tpr_preprocessing.preprocess_image(
+    image = fer_preprocessing.preprocess_image(
         image_buffer=image_buffer,
         bbox=bbox,
         output_height=_DEFAULT_IMAGE_SIZE,
@@ -322,6 +322,7 @@ def define_imagenet_flags():
         resnet_version='2',
         model_dir='./fer_model/',
         data_dir='./fer_dataset/',
+        export_dir='./fer_export/',
         fine_tune=True,
         pretrained_model_checkpoint_path='./resnet_imagenet_v2_fp32_20181001/',
     )

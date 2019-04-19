@@ -314,7 +314,7 @@ class DataConverter(object):
 if __name__ == '__main__':
     data_converter = DataConverter()
     train_records, validation_records = data_converter.to_tf_records(
-        'tpr', 'tpr_dataset', {'tpr_1', 'tpr_2', 'tpr_5'}, {'tpr_9'}
+        'tpr', 'tpr_dataset', {'tpr_1', 'tpr_2', 'tpr_10'}, {'tpr_9'}
     )
     print(train_records)
     print(validation_records)

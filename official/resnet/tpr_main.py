@@ -31,6 +31,8 @@ _SHUFFLE_BUFFER = 10000
 
 DATASET_NAME = 'TPR'
 
+tf.app.flags.DEFINE_string('f', '', 'kernel')
+
 
 ###############################################################################
 # Data processing
