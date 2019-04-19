@@ -392,6 +392,9 @@ class Model(object):
       data_format = (
           'channels_first' if tf.test.is_built_with_cuda() else 'channels_last')
 
+    # For predict usage, always set chennel last.
+    data_format = 'channels_last'
+
     self.resnet_version = resnet_version
     if resnet_version not in (1, 2):
       raise ValueError(
